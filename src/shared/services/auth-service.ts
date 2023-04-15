@@ -41,27 +41,19 @@ $api.interceptors.response.use(
 export default $api
 
 export class AuthService {
-  static async login(email: string, password: string): Promise<TResponseAuth> {
-    return await $api.post<TSignIn>("signin", {
-      email: email,
-      password: password,
-      rememberMe: false,
+  static async login(form: TSignIn): Promise<AxiosResponse<TResponseAuth>> {
+    return await $api.post<TResponseAuth>("sign-in", {
+      form,
     })
   }
 
-  static async register(email, password, name): Promise<TResponseAuth> {
-    return await $api.post("register", {
-      email: email,
-      password: password,
-      name: name,
+  static async register(form: TSignUp): Promise<AxiosResponse<TResponseAuth>> {
+    return await $api.post("sign-up", {
+      form,
     })
   }
 
   static async tokenLogin() {
     return await $api.post("signinWithAccess", null, { withCredentials: true })
-  }
-
-  static async logout() {
-    return await $api.post("signout"), null, { withCredentials: true }
   }
 }
