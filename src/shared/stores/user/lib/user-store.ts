@@ -17,8 +17,11 @@ const initialState: TUserStore = {
   isAuth: false,
   error: null,
   role: Role.jobOfferer,
-  user: null,
+  user_id: null,
   token: null,
+  title: null,
+  is_tested: false,
+  spec: null,
 }
 
 export const useAuthStore = create<TUserStore & Actions>()(
@@ -33,12 +36,16 @@ export const useAuthStore = create<TUserStore & Actions>()(
         set({ error: "Произошла ошибка" })
         throw Error("Произошла ошибка", e.response.status)
       })
+
       localStorage.setItem("token", data["token"])
       set(() => ({
         isAuth: true,
         role: data.role,
-        user: data.id,
+        user_id: data.id,
         token: data.token,
+        is_tested: data.is_tested,
+        spec: data.spec,
+        title: data.name,
       }))
     },
     register: async (user) => {
@@ -47,9 +54,12 @@ export const useAuthStore = create<TUserStore & Actions>()(
       try {
         set(() => ({
           isAuth: true,
-          user: data.id,
+          user_id: data.id,
+          title: data.name,
           role: data.role,
           token: data.token,
+          is_tested: data.is_tested,
+          spec: data.spec,
         }))
       } catch (e: any) {
         if (e.response.status === 403) {
@@ -67,7 +77,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
       try {
         set(() => ({
           isAuth: true,
-          user: data.id,
+          user_id: data.id,
           role: data.role,
           token: data.token,
         }))

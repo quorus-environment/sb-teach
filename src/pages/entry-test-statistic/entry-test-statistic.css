@@ -1,0 +1,31 @@
+.test-question-statistic__common-score {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.test-question-statistic__scores-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 280px;
+}
+
+.test-question-statistic__score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-question-statistic__score--text {
+    margin-right: 28px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 47px
+}
+
+.buttton__container {
+    display: flex;
+    justify-content: center;
+}

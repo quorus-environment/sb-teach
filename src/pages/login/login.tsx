@@ -3,6 +3,7 @@ import "./auth.css"
 import { Input } from "../../shared/ui/input/input"
 import { Button } from "../../shared/ui/button/button"
 import { useAuthStore } from "../../shared/stores/user/lib/user-store"
+import { Link } from "react-router-dom"
 
 export const Login = () => {
   const { login } = useAuthStore()
@@ -32,6 +33,9 @@ export const Login = () => {
           placeholder={"Пароль"}
         ></Input>
         <Button type={"submit"}>Войти</Button>
+        <Link className={"register-link"} to={"/register"}>
+          Зарегестрироваться
+        </Link>
       </form>
     </div>
   )

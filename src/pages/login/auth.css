@@ -6,7 +6,9 @@
     margin-inline: auto;
     margin-top: 260px;
 }
-
+.register-link{
+    color: #149a25;
+}
 .app-title{
     font-weight: 400;
     font-size: 25px;
