@@ -14,23 +14,23 @@ const App = () => {
     refresh: st.refresh,
     isLoading: st.loading,
   }))
-  // useEffect(() => {
-  //   refresh().then(console.log)
-  // }, [])
-  // if (isLoading) {
-  //   return <div>loading...</div>
-  // }
-  // if (!user) {
-  //   return (
-  //     <div className={"app"}>
-  //       <Routes>
-  //         <Route path="/sign-in" element={<Login />}></Route>
-  //         <Route path="/register" element={<Register />}></Route>
-  //         <Route path="*" element={<Navigate to="/sign-in" />}></Route>
-  //       </Routes>
-  //     </div>
-  //   )
-  // }
+  useEffect(() => {
+    refresh().then(console.log)
+  }, [])
+  if (isLoading) {
+    return <div>loading...</div>
+  }
+  if (!user) {
+    return (
+      <div className={"app"}>
+        <Routes>
+          <Route path="/sign-in" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="*" element={<Navigate to="/sign-in" />}></Route>
+        </Routes>
+      </div>
+    )
+  }
 
   return (
     <div className={"app"}>

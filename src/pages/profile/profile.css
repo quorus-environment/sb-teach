@@ -17,10 +17,11 @@ textarea{
 
 .profile-textarea{
     width: 800px;
-    height: 100%;
+    min-height: 100%;
+    resize: none;
 }
 .profile-button{
-    /*margin-inline: auto;*/
+    margin-bottom: 90px;
     margin-top:94px;
 }
 .profile-status{

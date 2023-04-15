@@ -50,9 +50,7 @@ export class AuthService {
   }
 
   static async register(form: TSignUp): Promise<AxiosResponse<TResponseAuth>> {
-    return await $api.post<TResponseAuth>("/sign-up", {
-      form,
-    })
+    return await $api.post<TResponseAuth>("/sign-up", form)
   }
 
   static async refresh() {
