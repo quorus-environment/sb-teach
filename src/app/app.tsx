@@ -1,5 +1,5 @@
 import "./app.css"
-import { Login } from "../pages/auth/login"
+import { Login } from "../pages/login/login"
 import { Routes, Route, Navigate } from "react-router-dom"
 import { Register } from "../pages/register/register"
 import { useAuthStore } from "../shared/stores/user/lib/user-store"

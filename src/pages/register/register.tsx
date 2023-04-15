@@ -4,6 +4,22 @@ import { Input } from "../../shared/ui/input/input"
 import { Button } from "../../shared/ui/button/button"
 import { useAuthStore } from "../../shared/stores/user/lib/user-store"
 import { Role } from "../../shared/model/role"
+import { Link } from "react-router-dom"
+
+const roles = [
+  {
+    title: "Я соискатель",
+    role: Role.applicant,
+  },
+  {
+    title: "Я работодатель",
+    role: Role.jobOfferer,
+  },
+  {
+    title: "Я ментор",
+    role: Role.mentor,
+  },
+]
 
 export const Register = () => {
   const { register } = useAuthStore()
@@ -75,17 +91,23 @@ export const Register = () => {
           placeholder={"Пароль"}
         ></Input>
         <ul className={"auth-roles"}>
-          <li className={"auth-role"} onClick={() => setRole(Role.applicant)}>
-            Я соискатель
-          </li>
-          <li className={"auth-role"} onClick={() => setRole(Role.jobOfferer)}>
-            Я работодатель
-          </li>
-          <li className={"auth-role"} onClick={() => setRole(Role.mentor)}>
-            Я ментор
-          </li>
+          {roles.map((el: any) => {
+            return (
+              <li
+                className={`auth-role ${
+                  el.role === role ? "auth-role_active" : ""
+                }`}
+                onClick={() => setRole(el.role)}
+              >
+                {el.title}
+              </li>
+            )
+          })}
         </ul>
         <Button type={"submit"}>Зарегистрироваться</Button>
+        <Link className={"login-link"} to={"/login"}>
+          Есть аккаунт? Войти
+        </Link>
       </form>
     </div>
   )
