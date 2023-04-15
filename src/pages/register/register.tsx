@@ -91,9 +91,10 @@ export const Register = () => {
           placeholder={"Пароль"}
         ></Input>
         <ul className={"auth-roles"}>
-          {roles.map((el: any) => {
+          {roles.map((el: any, i) => {
             return (
               <li
+                key={i}
                 className={`auth-role ${
                   el.role === role ? "auth-role_active" : ""
                 }`}
