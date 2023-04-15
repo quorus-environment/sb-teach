@@ -4,23 +4,7 @@ import { TQuestion } from "../../../../pages/entry-test/entry-test"
 
 const initialState = {
   answers: [],
-  questions: [
-    {
-      id: "1",
-      type: "React",
-      question: "Бла-бла",
-      answers: [1, 2, 3, 4],
-      answer: 2,
-    },
-    { id: "2", type: "Js", question: "Ы-Ы", answers: [1, 2, 3, 4], answer: 1 },
-    {
-      id: "3",
-      type: "React",
-      question: "и-и",
-      answers: [1, 2, 3, 4],
-      answer: 3,
-    },
-  ],
+  questions: null,
 }
 
 export type TQuestionStore = {
@@ -39,5 +23,8 @@ export const useQuestionStore = create<TQuestionStore & TQuestionAction>()(
     addAnswer: (answer) =>
       set((state) => ({ answers: [...state.answers, answer] })),
     clearStorage: () => set(() => ({ ...initialState })),
+    addQuestions: (data: TQuestion[]) => {
+      set(() => ({ questions: data }))
+    },
   })),
 )
