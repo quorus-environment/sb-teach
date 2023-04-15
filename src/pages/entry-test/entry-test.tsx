@@ -33,7 +33,7 @@ export const EntryTest: FC = () => {
   }
   useEffect(() => {
     setId(questions[0].id)
-  })
+  }, [])
 
   return (
     <div className="entry-test__container">
