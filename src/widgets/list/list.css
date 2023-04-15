@@ -1,0 +1,28 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100vw;
+    padding: 0 120px;
+    gap: 20px;
+}
+
+.list_item {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list__left {
+    display: flex;
+    gap: 10px;
+}
+.list__right {
+    display: flex;
+    gap: 20px;
+}
+
+.list__avatar {
+    width: 150px;
+}

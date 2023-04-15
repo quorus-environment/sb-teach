@@ -1,0 +1,25 @@
+.infoList-title{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.infoList-data{
+    display: flex;
+    flex-direction: column;
+    row-gap: 33px;
+    padding: 30px;
+    width: 392px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 28px;
+}
+
+.info-list__button{
+    width: 100%;
+}
+
+.infoList-data li{
+    width: 100%;
+}
