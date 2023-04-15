@@ -9,6 +9,7 @@ import { EntryTestQuestion } from "../pages/entry-test-question/entry-test-quest
 import { EntryTest } from "../pages/entry-test/entry-test"
 import { AdditionalInfo } from "../pages/additional-info/additional-info"
 import { Header } from "../widgets/header/header"
+import { Profile } from "../pages/profile/profile"
 
 const spec: Array<string> = []
 
@@ -61,6 +62,7 @@ const App = () => {
             path="/test/entry/statistic"
             element={<EntryTestStatistic />}
           ></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/" element={<div>content</div>}></Route>
           <Route path="*" element={<Navigate to={"/"} />}></Route>
         </Routes>
