@@ -1,10 +1,15 @@
 import React, { useState } from "react"
 import "./entry-test-question.css"
-import { questions } from "../entry-test/entry-test"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "../../shared/ui/button/button"
+import { useQuestionStore } from "../../shared/stores/questions/lib/questions-store"
+import { TQuestion } from "../entry-test/entry-test"
 
 export const EntryTestQuestion = () => {
+  const { questions, addAnswer } = useQuestionStore((state) => ({
+    questions: state.questions as Array<TQuestion>,
+    addAnswer: state.addAnswer,
+  }))
   const navigate = useNavigate()
   const { id } = useParams()
   const [activeAnswer, setActiveAnswer] = useState<null | number>(null)
@@ -18,6 +23,7 @@ export const EntryTestQuestion = () => {
     } else {
       navigate(`/test/entry/${questions[questionIndex + 1].id}`)
     }
+    addAnswer(activeAnswer)
     setActiveAnswer(null)
   }
 
@@ -45,9 +51,13 @@ export const EntryTestQuestion = () => {
         ))}
       </div>
       {questionIndex + 1 !== questions.length ? (
-        <Button onClick={handleClick}>Перейти к следующему</Button>
+        <div className="test-question__submit-container">
+          <Button onClick={handleClick}>Перейти к следующему</Button>
+        </div>
       ) : (
-        <Button onClick={handleClick}>Завершить тест</Button>
+        <div className="test-question__submit-container">
+          <Button onClick={handleClick}>Завершить тест</Button>
+        </div>
       )}
     </div>
   )

@@ -1,6 +1,7 @@
 .test-question__container {
     color: black;
     padding-top: 110px;
+    padding-bottom: 40px
 }
 
 .test-question__question--number {
@@ -38,5 +39,11 @@
 .test-question__answer--active {
     background-color: #00A658;
     color: white
+}
+
+.test-question__submit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
