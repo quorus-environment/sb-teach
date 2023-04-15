@@ -14,20 +14,15 @@ const spec: Array<string> = []
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
-  const [spec, setSpec] = useState<Array<string> | null>(null)
-  const [isTested, setTested] = useState<Array<string> | null>(null)
-  const { user, refresh } = useAuthStore((st) => ({
+  const { user, refresh, spec, isTested } = useAuthStore((st) => ({
     user: st.user_id,
     refresh: st.refresh,
+    isTested: st.is_tested,
+    spec: st.spec,
   }))
   useEffect(() => {
     if (!user) {
-      refresh()
-        .then((data) => {
-          setSpec(data?.["spec"] || null)
-          setTested(data?.["isTested"] || null)
-        })
-        .finally(() => setFetched(true))
+      refresh().finally(() => setFetched(true))
     }
   }, [])
   if (!isFetched) {

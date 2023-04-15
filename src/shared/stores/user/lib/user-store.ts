@@ -20,6 +20,8 @@ const initialState: TUserStore = {
   user_id: null,
   token: null,
   title: null,
+  is_tested: false,
+  spec: null,
 }
 
 export const useAuthStore = create<TUserStore & Actions>()(
@@ -41,8 +43,10 @@ export const useAuthStore = create<TUserStore & Actions>()(
         role: data.role,
         user_id: data.id,
         token: data.token,
+        is_tested: data.is_tested,
+        spec: data.spec,
+        title: data.name,
       }))
-      return data
     },
     register: async (user) => {
       const { data } = await AuthService.register(user)
@@ -54,6 +58,8 @@ export const useAuthStore = create<TUserStore & Actions>()(
           title: data.name,
           role: data.role,
           token: data.token,
+          is_tested: data.is_tested,
+          spec: data.spec,
         }))
       } catch (e: any) {
         if (e.response.status === 403) {

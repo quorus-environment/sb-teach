@@ -5,7 +5,7 @@ export type TResponseAuth = {
   id: string
   role: string
   name: string
-  is_tested: string
+  is_tested: boolean
   spec: Array<string>
 }
 

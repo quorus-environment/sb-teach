@@ -14,4 +14,6 @@ export type TUserStore = {
   error: string | null
   token: string | null
   title: string | null
+  spec: Array<string> | null
+  is_tested: boolean
 }
