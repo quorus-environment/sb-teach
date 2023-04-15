@@ -12,9 +12,10 @@ type Actions = {
   refresh: () => Promise<void>
 }
 
-const initialState = {
+const initialState: TUserStore = {
   isAuth: false,
   error: null,
+  role: null,
   user: null,
   token: null,
 }
@@ -34,6 +35,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
       localStorage.setItem("token", data["token"])
       set(() => ({
         isAuth: true,
+        role: data.role,
         user: data.id,
         token: data.token,
       }))
@@ -45,6 +47,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
         set(() => ({
           isAuth: true,
           user: data.id,
+          role: data.role,
           token: data.token,
         }))
       } catch (e: any) {
@@ -64,6 +67,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
         set(() => ({
           isAuth: true,
           user: data.id,
+          role: data.role,
           token: data.token,
         }))
       } catch (error) {

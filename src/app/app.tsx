@@ -15,7 +15,7 @@ const App = () => {
   }))
   useEffect(() => {
     if (!user) {
-      refresh().then(() => setFetched(true))
+      refresh().finally(() => setFetched(true))
     }
   }, [])
   if (!isFetched) {

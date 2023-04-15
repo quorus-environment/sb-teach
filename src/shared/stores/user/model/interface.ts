@@ -9,6 +9,7 @@ export type TUser = {
 
 export type TUserStore = {
   user: string | null
+  role: string | null
   isAuth: boolean
   error: string | null
   token: string | null
