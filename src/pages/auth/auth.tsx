@@ -11,8 +11,8 @@ export const Auth = () => {
         <div className={'auth-container'}>
             <form onSubmit={onSubmit} className={'auth-form'}>
                 <h1>Войти</h1>
-                <Input type={"text"} placeholder={'name'}></Input>
-                <Input type={"password"} placeholder={'password'}></Input>
+                <Input type={"text"} placeholder={'Имя'}></Input>
+                <Input type={"password"} placeholder={'Пароль'}></Input>
                 <Button type={"submit"}>Войти</Button>
             </form>
         </div>
