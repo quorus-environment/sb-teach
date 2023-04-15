@@ -2,14 +2,22 @@ import "./header.css"
 import { useAuthStore } from "../../shared/stores/user/lib/user-store"
 import { Link } from "react-router-dom"
 import { useMemo } from "react"
+import { Role } from "../../shared/model/role"
 
 export const Header = () => {
   const { role } = useAuthStore((st) => ({
     role: st.role,
   }))
   const roledLinks = useMemo(() => {
-    if (role === "offerer") {
+    if (role === Role.jobOfferer) {
       return [{ to: "/applicant-list", text: "Соискатели" }]
+    }
+    if (role === Role.applicant) {
+      return [
+        { to: "/train", text: "Тренироваться" },
+        { to: "/find-project", text: "Найти проект" },
+        { to: "/find-mentor", text: "Найти ментора" },
+      ]
     }
   }, [])
   return (

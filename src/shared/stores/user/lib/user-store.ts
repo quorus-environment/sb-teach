@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware"
 import { TUserStore } from "../model/interface"
 import { TSignIn, TSignUp } from "../../../services/auth-model"
 import { AuthService } from "../../../services/auth-service"
+import { Role } from "../../../model/role"
 
 type Actions = {
   register: (user: TSignUp) => void
@@ -15,7 +16,7 @@ type Actions = {
 const initialState: TUserStore = {
   isAuth: false,
   error: null,
-  role: null,
+  role: Role.jobOfferer,
   user: null,
   token: null,
 }
