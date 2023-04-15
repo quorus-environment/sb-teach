@@ -1,17 +1,22 @@
 import React, {SyntheticEvent} from 'react';
 import './auth.css'
+import {Input} from "../../shared/ui/input/input";
+import {Button} from "../../shared/ui/button/button";
 
 export const Auth = () => {
     const onSubmit = (e: SyntheticEvent) => {
         e.preventDefault()
     }
     return (
-        <form onSubmit={onSubmit} className={'auth-form'}>
-            <h1>Войти</h1>
-            <input type={"text"} placeholder={'name'}></input>
-            <input type={"password"} placeholder={'password'}></input>
-            <button type={"submit"}>Войти</button>
-        </form>
+        <div className={'auth-container'}>
+            <form onSubmit={onSubmit} className={'auth-form'}>
+                <h1>Войти</h1>
+                <Input type={"text"} placeholder={'name'}></Input>
+                <Input type={"password"} placeholder={'password'}></Input>
+                <Button type={"submit"}>Войти</Button>
+            </form>
+        </div>
+
     );
 };
 
