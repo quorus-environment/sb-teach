@@ -7,6 +7,36 @@
   margin-bottom: 91px;
 }
 
+select{
+  background: rgba(223, 223, 223, 0.46);
+  padding: 9px 37px;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 23px;
+  border-radius: 9px;
+}
+
+
+.additional-info__container h1{
+  margin-bottom: 91px;
+  font-weight: 500;
+}
+
+.additional-info__choose-spec{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  transition: height 1s ease-out;
+}
+.additional-info__selects{
+  max-width: 50%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
 .additional-info__title {
   margin-bottom: 82px;
 }

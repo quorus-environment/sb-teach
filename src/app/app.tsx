@@ -11,8 +11,6 @@ import { AdditionalInfo } from "../pages/additional-info/additional-info"
 import { Header } from "../widgets/header/header"
 import { Profile } from "../pages/profile/profile"
 
-const spec: Array<string> = []
-
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
   const { user, refresh, spec, isTested } = useAuthStore((st) => ({
@@ -44,10 +42,15 @@ const App = () => {
   if (spec && spec.length === 0) {
     return (
       <div className={"app"}>
-        <Routes>
-          <Route path="/additional-info" element={<AdditionalInfo />}></Route>
-          <Route path="*" element={<Navigate to="/additional-info" />}></Route>
-        </Routes>
+        <div className={"wrapper"}>
+          <Routes>
+            <Route path="/additional-info" element={<AdditionalInfo />}></Route>
+            <Route
+              path="*"
+              element={<Navigate to="/additional-info" />}
+            ></Route>
+          </Routes>
+        </div>
       </div>
     )
   }
