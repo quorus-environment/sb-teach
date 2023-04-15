@@ -12,9 +12,13 @@ export const InfoList: FC<TInfoList> = ({ list, title }) => {
     <div>
       <ul className={"infoList-data"}>
         <li className={"infoList-title"}>{title}</li>
-        {list.map((el) => (
-          <li>
-            <Input value={el} extraClass={"info-list__button"}></Input>
+        {list.map((el, i) => (
+          <li key={i}>
+            <Input
+              key={i}
+              defaultValue={el}
+              extraClass={"info-list__button"}
+            ></Input>
           </li>
         ))}
       </ul>

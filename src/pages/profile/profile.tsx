@@ -1,9 +1,22 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./profile.css"
 import { InfoList } from "../../shared/ui/info-list/info-list"
 import { Button } from "../../shared/ui/button/button"
+import { AuthService } from "../../shared/services/auth-service"
+import { TProfileData } from "../../shared/services/auth-model"
+
+export const rolesInterpretor: Record<string, string> = {
+  applicant: "Соискатель",
+}
 
 export const Profile = () => {
+  const [profileData, setProfileData] = useState<TProfileData | null>(null)
+  useEffect(() => {
+    AuthService.getProfileInfo().then(({ data }) => {
+      setProfileData(data)
+    })
+  }, [])
+  if (!profileData) return <div>loading...</div>
   return (
     <div className={"profile-container"}>
       <div className={"profile-row"}>
@@ -18,7 +31,12 @@ export const Profile = () => {
         <div className={"profile-info"}>
           <InfoList
             title={"Личные данные"}
-            list={["Имя", "Фамилия", "Отчество", "Дата рождения"]}
+            list={[
+              profileData.first_name,
+              profileData.second_name,
+              profileData.first_name,
+              rolesInterpretor[profileData.role],
+            ]}
           ></InfoList>
           <InfoList
             title={"Образование/резюме"}

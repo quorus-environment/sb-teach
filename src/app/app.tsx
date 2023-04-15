@@ -6,6 +6,7 @@ import { useAuthStore } from "../shared/stores/user/lib/user-store"
 import React, { useEffect, useState } from "react"
 import { ApplicantList } from "../pages/user-list/applicant-list"
 import { Header } from "../widgets/header/header"
+import { Profile } from "../pages/profile/profile"
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
@@ -36,15 +37,17 @@ const App = () => {
   return (
     <div className={"app"}>
       <Header />
-      <Routes>
-        <Route path="/" element={<div>content</div>}></Route>
-        <Route path="/train" element={<div>train</div>}></Route>
-        <Route path="/find-mentor" element={<div>find mentor</div>}></Route>
-        <Route path="/find-project" element={<div>find project</div>}></Route>
-        <Route path="/applicant-list" element={<ApplicantList />}></Route>
-        <Route path="/profile" element={<div>Profile</div>}></Route>
-        <Route path="*" element={<Navigate to={"/"} />}></Route>
-      </Routes>
+      <div className={"wrapper"}>
+        <Routes>
+          <Route path="/" element={<div>content</div>}></Route>
+          <Route path="/train" element={<div>train</div>}></Route>
+          <Route path="/find-mentor" element={<div>find mentor</div>}></Route>
+          <Route path="/find-project" element={<div>find project</div>}></Route>
+          <Route path="/applicant-list" element={<ApplicantList />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="*" element={<Navigate to={"/"} />}></Route>
+        </Routes>
+      </div>
     </div>
   )
 }

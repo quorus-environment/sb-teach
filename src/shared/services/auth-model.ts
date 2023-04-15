@@ -11,6 +11,16 @@ export type TSignIn = {
   password: string
 }
 
+export type TProfileData = {
+  first_name: string
+  id: string
+  image: string | null
+  last_name: string
+  role: string
+  second_name: string
+  username: string
+}
+
 export type TSignUp = {
   username: string
   password: string

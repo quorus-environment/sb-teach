@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios"
-import { TResponseAuth, TSignIn, TSignUp } from "./auth-model"
+import { TProfileData, TResponseAuth, TSignIn, TSignUp } from "./auth-model"
 
-export const API_URL = "http://localhost:8080/auth"
+export const API_URL = "http://localhost:8080"
 
 const $api = axios.create({
   baseURL: API_URL,
@@ -31,7 +31,7 @@ $api.interceptors.response.use(
       !error.config._isRetry
     ) {
       try {
-        const response = await axios.post(`${API_URL}/refresh`)
+        const response = await axios.post(`${API_URL}/auth/refresh`)
         localStorage.setItem("token", response.data.access_token)
         return $api.request(originalConfig)
       } catch {
@@ -46,14 +46,18 @@ export default $api
 
 export class AuthService {
   static async login(form: TSignIn): Promise<AxiosResponse<TResponseAuth>> {
-    return await $api.post<TResponseAuth>("/sign-in", form)
+    return await $api.post<TResponseAuth>("/auth/sign-in", form)
   }
 
   static async register(form: TSignUp): Promise<AxiosResponse<TResponseAuth>> {
-    return await $api.post<TResponseAuth>("/sign-up", form)
+    return await $api.post<TResponseAuth>("/auth/sign-up", form)
   }
 
   static async refresh() {
-    return await $api.post("/refresh")
+    return await $api.post("/auth/refresh")
+  }
+
+  static async getProfileInfo(): Promise<AxiosResponse<TProfileData>> {
+    return await $api.get("/users/get_profile_info")
   }
 }

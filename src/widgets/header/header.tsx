@@ -23,9 +23,9 @@ export const Header = () => {
   return (
     <div className={"header"}>
       <nav className={"header__navigation"}>
-        {roledLinks?.map((link) => {
+        {roledLinks?.map((link, i) => {
           return (
-            <Link to={link.to}>
+            <Link key={i} to={link.to}>
               <p>{link.text}</p>
             </Link>
           )
