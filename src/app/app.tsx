@@ -1,8 +1,10 @@
 import './app.css'
+import {Auth} from "../pages/auth/auth";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="app">
+          <Auth/>
     </div>
   )
 }
