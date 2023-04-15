@@ -42,18 +42,18 @@ export default $api
 
 export class AuthService {
   static async login(form: TSignIn): Promise<AxiosResponse<TResponseAuth>> {
-    return await $api.post<TResponseAuth>("sign-in", {
+    return await $api.post<TResponseAuth>("/sign-in", {
       form,
     })
   }
 
   static async register(form: TSignUp): Promise<AxiosResponse<TResponseAuth>> {
-    return await $api.post("sign-up", {
+    return await $api.post("/sign-up", {
       form,
     })
   }
 
-  static async tokenLogin() {
-    return await $api.post("signinWithAccess", null, { withCredentials: true })
+  static async refresh() {
+    return await $api.post("/refresh")
   }
 }
