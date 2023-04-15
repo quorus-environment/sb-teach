@@ -16,7 +16,6 @@ const initialState = {
   isAuth: false,
   error: null,
   user: null,
-  loading: false,
   token: null,
 }
 
@@ -24,23 +23,22 @@ export const useAuthStore = create<TUserStore & Actions>()(
   devtools((set) => ({
     ...initialState,
     refresh: async () => {
-      set({ loading: true })
       const { data } = await AuthService.refresh().catch((e) => {
         if (e.response.status === 403) {
-          set({ loading: false, error: "Не авторизован" })
+          set({ error: "Не авторизован" })
+          throw Error("Не авторизован")
         }
-        throw Error("Не авторизован")
+        set({ error: "Произошла ошибка" })
+        throw Error("Произошла ошибка", e.response.status)
       })
       localStorage.setItem("token", data["token"])
       set(() => ({
         isAuth: true,
         user: data.id,
         token: data.token,
-        loading: false,
       }))
     },
     register: async (user) => {
-      set({ loading: true })
       const { data } = await AuthService.register(user)
       localStorage.setItem("token", data["token"])
       try {
@@ -49,9 +47,13 @@ export const useAuthStore = create<TUserStore & Actions>()(
           user: data.id,
           token: data.token,
         }))
-        set({ loading: false })
-      } catch (error) {
-        set(() => ({ error: "", loading: false }))
+      } catch (e: any) {
+        if (e.response.status === 403) {
+          set({ error: "Не авторизован" })
+          throw Error("Не авторизован")
+        }
+        set({ error: "Произошла ошибка" })
+        throw Error("Произошла ошибка", e.response.status)
       }
     },
 
