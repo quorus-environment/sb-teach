@@ -7,6 +7,9 @@ import React, { useEffect, useState } from "react"
 import { ApplicantList } from "../pages/user-list/applicant-list"
 import { Header } from "../widgets/header/header"
 import { Profile } from "../pages/profile/profile"
+import { EntryTestStatistic } from "../pages/entry-test-statistic/entry-test-statistic"
+import { EntryTestQuestion } from "../pages/entry-test-question/entry-test-question"
+import { EntryTest } from "../pages/entry-test/entry-test"
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
@@ -39,6 +42,12 @@ const App = () => {
       <Header />
       <div className={"wrapper"}>
         <Routes>
+          <Route path="/test/entry" element={<EntryTest />}></Route>
+          <Route path="/test/entry/:id" element={<EntryTestQuestion />}></Route>
+          <Route
+            path="/test/entry/statistic"
+            element={<EntryTestStatistic />}
+          ></Route>
           <Route path="/" element={<div>content</div>}></Route>
           <Route path="/train" element={<div>train</div>}></Route>
           <Route path="/find-mentor" element={<div>find mentor</div>}></Route>
