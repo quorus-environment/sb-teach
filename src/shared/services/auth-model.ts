@@ -1,4 +1,4 @@
-import {TUser} from "../stores/user/model/interface";
+import { TUser } from "../stores/user/model/interface"
 
 export type TResponseAuth = {
   access_token: string
@@ -14,7 +14,9 @@ export type TSignUp = {
   username: string
   password: string
   email: string
+  phone: string
   first_name: string
+  role: string
   last_name: string
   second_name: string | null
 }

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios"
 import { TResponseAuth, TSignIn, TSignUp } from "./auth-model"
 
-export const API_URL = "http://localhost:8080/user"
+export const API_URL = "http://localhost:8080/auth"
 
 const $api = axios.create({
   baseURL: API_URL,

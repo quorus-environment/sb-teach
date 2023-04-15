@@ -1,10 +1,9 @@
 import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
-import { devtools, persist } from "zustand/middleware"
-
+import { devtools } from "zustand/middleware"
 import { TUserStore } from "../model/interface"
 import { TSignIn, TSignUp } from "../../../services/auth-model"
 import { AuthService } from "../../../services/auth-service"
+
 type Actions = {
   register: (user: TSignUp) => void
   logout: () => void
@@ -21,7 +20,7 @@ const initialState = {
 
 export const useAuthStore = create<TUserStore & Actions>()(
   devtools(
-    immer((set) => ({
+    ((set) => ({
       ...initialState,
       register: async (user) => {
         set({ loading: true })
