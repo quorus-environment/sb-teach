@@ -11,7 +11,11 @@ const $api = axios.create({
 })
 
 $api.interceptors.request.use((config) => {
-  config.headers.Authorization = "Bearer " + localStorage.getItem("accessToken")
+  const token = localStorage.getItem("token")
+  if (!token) {
+    return config
+  }
+  config.headers.Authorization = "Bearer " + token
   return config
 })
 
@@ -28,7 +32,7 @@ $api.interceptors.response.use(
     ) {
       try {
         const response = await axios.post(`${API_URL}/refresh`)
-        localStorage.setItem("accessToken", response.data.access_token)
+        localStorage.setItem("token", response.data.access_token)
         return $api.request(originalConfig)
       } catch {
         console.error("Произошла ошибка при обновлении токена")
@@ -42,9 +46,7 @@ export default $api
 
 export class AuthService {
   static async login(form: TSignIn): Promise<AxiosResponse<TResponseAuth>> {
-    return await $api.post<TResponseAuth>("/sign-in", {
-      form,
-    })
+    return await $api.post<TResponseAuth>("/sign-in", form)
   }
 
   static async register(form: TSignUp): Promise<AxiosResponse<TResponseAuth>> {

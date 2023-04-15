@@ -1,8 +1,9 @@
 import { TUser } from "../stores/user/model/interface"
 
 export type TResponseAuth = {
-  access_token: string
-  user: TUser
+  token: string
+  id: string
+  role: string
 }
 
 export type TSignIn = {

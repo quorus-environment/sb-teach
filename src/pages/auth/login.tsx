@@ -4,7 +4,7 @@ import {Input} from "../../shared/ui/input/input";
 import {Button} from "../../shared/ui/button/button";
 import {useAuthStore} from "../../shared/stores/user/lib/user-store";
 
-export const Auth = () => {
+export const Login = () => {
     const {login} = useAuthStore()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -27,4 +27,3 @@ export const Auth = () => {
 
     );
 };
-
