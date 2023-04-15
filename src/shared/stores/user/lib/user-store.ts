@@ -12,7 +12,7 @@ type Actions = {
 
 
 export const useAuthStore = create<TUser & Actions>()(
-    immer(
+    devtools(immer(
         (set) => ({
             isAuth: false,
             error: null,
@@ -45,4 +45,4 @@ export const useAuthStore = create<TUser & Actions>()(
             logout: () => set(() => ({})),
             cleanErrors: () => set(() => ({ error: null })),
         })
-    ));
+    )));
