@@ -3,6 +3,7 @@ import "./register.css"
 import { Input } from "../../shared/ui/input/input"
 import { Button } from "../../shared/ui/button/button"
 import { useAuthStore } from "../../shared/stores/user/lib/user-store"
+import { Role } from "../../shared/model/role"
 
 export const Register = () => {
   const { register } = useAuthStore()
@@ -10,7 +11,7 @@ export const Register = () => {
   const [password, setPassword] = useState("")
   const [firstName, setFirstName] = useState("")
   const [phone, setPhone] = useState("")
-  const [role, setRole] = useState("соискатель")
+  const [role, setRole] = useState<Role>(Role.applicant)
   const [lastName, setLastName] = useState("")
   const [secondName, setSecondName] = useState("")
   const [email, setEmail] = useState("")
@@ -74,9 +75,15 @@ export const Register = () => {
           placeholder={"Пароль"}
         ></Input>
         <ul className={"auth-roles"}>
-          <li className={"auth-role"}>Я соискатель</li>
-          <li className={"auth-role"}>Я работодатель</li>
-          <li className={"auth-role"}>Я ментор</li>
+          <li className={"auth-role"} onClick={() => setRole(Role.applicant)}>
+            Я соискатель
+          </li>
+          <li className={"auth-role"} onClick={() => setRole(Role.jobOfferer)}>
+            Я работодатель
+          </li>
+          <li className={"auth-role"} onClick={() => setRole(Role.mentor)}>
+            Я ментор
+          </li>
         </ul>
         <Button type={"submit"}>Зарегистрироваться</Button>
       </form>
