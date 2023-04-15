@@ -27,6 +27,7 @@ export type TProfileData = {
 export type TSignUp = {
   username: string
   password: string
+  invitations: string[]
   email: string
   phone: string
   first_name: string

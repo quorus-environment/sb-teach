@@ -42,6 +42,7 @@ export const Register = () => {
       password,
       phone,
       role,
+      invitations: [],
     })
   }
   return (

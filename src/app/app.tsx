@@ -51,17 +51,31 @@ const App = () => {
       </div>
     )
   }
+  if (!isTested) {
+    return (
+      <div className={"app"}>
+        <div className={"wrapper"}>
+          <Routes>
+            <Route path="/test/entry" element={<EntryTest />}></Route>
+            <Route
+              path="/test/entry/:id"
+              element={<EntryTestQuestion />}
+            ></Route>
+            <Route
+              path="/test/entry/statistic"
+              element={<EntryTestStatistic />}
+            ></Route>
+            <Route path="*" element={<Navigate to="/test/entry" />}></Route>
+          </Routes>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className={"app"}>
       <Header />
       <div className={"wrapper"}>
         <Routes>
-          <Route path="/test/entry" element={<EntryTest />}></Route>
-          <Route path="/test/entry/:id" element={<EntryTestQuestion />}></Route>
-          <Route
-            path="/test/entry/statistic"
-            element={<EntryTestStatistic />}
-          ></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/" element={<div>content</div>}></Route>
           <Route path="*" element={<Navigate to={"/"} />}></Route>

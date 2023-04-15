@@ -1,10 +1,24 @@
 import React, { ChangeEvent, useState } from "react"
 import "./additional-info.css"
+import axios from "axios"
+import $api from "../../shared/services/auth-service"
+import { useAuthStore } from "../../shared/stores/user/lib/user-store"
 
 export const AdditionalInfo = () => {
   const [direction, setDirection] = useState<string | null>(null)
-  const [frontend, setFrontend] = useState<string | null>(null)
-  const [backend, setBackend] = useState<string | null>(null)
+  const [framework, setFramework] = useState<string | null>(null)
+  const [about, setAbout] = useState<string | null>(null)
+  const { refresh } = useAuthStore((st) => ({
+    refresh: st.refresh,
+  }))
+  const onSubmit = () => {
+    $api.post("/users/save_additional_info", {
+      category: direction,
+      framework,
+      about,
+    })
+    refresh()
+  }
   return (
     <div className="additional-info__container">
       <h1>Еще немного информации о вас</h1>
@@ -25,7 +39,7 @@ export const AdditionalInfo = () => {
         {(direction === "frontend" || direction === "fullstack") && (
           <select
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-              setFrontend(e.target.value)
+              setFramework(e.target.value)
             }
           >
             <option value="" disabled selected hidden>
@@ -40,7 +54,7 @@ export const AdditionalInfo = () => {
         {(direction === "backend" || direction === "fullstack") && (
           <select
             onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-              setBackend(e.target.value)
+              setFramework(e.target.value)
             }
           >
             <option value="" disabled selected hidden>
@@ -53,6 +67,8 @@ export const AdditionalInfo = () => {
             <option value="express">express</option>
           </select>
         )}
+        <input value={about || ""} onChange={(e) => setAbout(e.target.value)} />
+        <button onClick={onSubmit}>submit</button>
       </div>
     </div>
   )
