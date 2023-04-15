@@ -28,7 +28,7 @@ $api.interceptors.response.use(
     ) {
       try {
         const response = await axios.post(`${API_URL}/refresh`)
-        localStorage.setItem("accessToken", response.data.accessToken)
+        localStorage.setItem("accessToken", response.data.access_token)
         return $api.request(originalConfig)
       } catch {
         console.error("Произошла ошибка при обновлении токена")

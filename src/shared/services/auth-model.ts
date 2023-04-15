@@ -1,5 +1,5 @@
 export type TResponseAuth = {
-  accessToken: string
+  access_token: string
   id: string
   role: string
   data: any
