@@ -26,7 +26,6 @@ export const useAuthStore = create<TUserStore & Actions>()(
     refresh: async () => {
       set({ loading: true })
       const { data } = await AuthService.refresh().catch((e) => {
-        console.log(e)
         if (e.response.status === 403) {
           set({ loading: false, error: "Не авторизован" })
         }
