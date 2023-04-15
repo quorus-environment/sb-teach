@@ -10,7 +10,7 @@ export const Auth = () => {
     return (
         <div className={'auth-container'}>
             <form onSubmit={onSubmit} className={'auth-form'}>
-                <h1>Войти</h1>
+                <h1 className={'app-title'}>Войти</h1>
                 <Input type={"text"} placeholder={'Имя'}></Input>
                 <Input type={"password"} placeholder={'Пароль'}></Input>
                 <Button type={"submit"}>Войти</Button>
