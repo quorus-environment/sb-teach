@@ -1,0 +1,10 @@
+.button-default{
+    padding: 14px 57px;
+    background: #00A658;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    border-radius: 9px;
+    color: white;
+}
