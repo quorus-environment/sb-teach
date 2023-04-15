@@ -1,5 +1,9 @@
 .app{
-    max-width: 1224px;
     margin: 0 auto;
     height: 100%;
+}
+
+.wrapper{
+    max-width: 1240px;
+    margin-inline: auto;
 }
