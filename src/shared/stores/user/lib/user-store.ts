@@ -1,15 +1,15 @@
 import { create } from "zustand"
-import { immer } from "zustand/middleware/immer"
-import { devtools, persist } from "zustand/middleware"
-
+import { devtools } from "zustand/middleware"
 import { TUserStore } from "../model/interface"
 import { TSignIn, TSignUp } from "../../../services/auth-model"
 import { AuthService } from "../../../services/auth-service"
+
 type Actions = {
   register: (user: TSignUp) => void
   logout: () => void
   cleanErrors: () => void
   login: (user: TSignIn) => void
+  refresh: () => Promise<void>
 }
 
 const initialState = {
@@ -17,47 +17,64 @@ const initialState = {
   error: null,
   user: null,
   loading: false,
+  token: null,
 }
 
 export const useAuthStore = create<TUserStore & Actions>()(
-  devtools(
-    immer((set) => ({
-      ...initialState,
-      register: async (user) => {
-        set({ loading: true })
-        const { data } = await AuthService.register(user)
-        localStorage.setItem("accessToken", data["access_token"])
-        try {
-          set(() => ({
-            isAuth: true,
-            user: data.user,
-          }))
-          set({ loading: false })
-        } catch (error) {
-          set(() => ({ error: "", loading: false }))
+  devtools((set) => ({
+    ...initialState,
+    refresh: async () => {
+      set({ loading: true })
+      const { data } = await AuthService.refresh().catch((e) => {
+        if (e.response.status === 403) {
+          set({ loading: false, error: "Не авторизован" })
         }
-      },
-
-      login: async (user: TSignIn) => {
-        const { data } = await AuthService.login(user)
-        localStorage.setItem("accessToken", data["access_token"])
-        try {
-          set(() => ({
-            isAuth: true,
-            user: data.user,
-          }))
-        } catch (error) {
-          set(() => ({ error: "" }))
-        }
-      },
-      logout: () => {
-        localStorage.setItem("accessToken", "")
+        throw Error("Не авторизован")
+      })
+      localStorage.setItem("token", data["token"])
+      set(() => ({
+        isAuth: true,
+        user: data.id,
+        token: data.token,
+        loading: false,
+      }))
+    },
+    register: async (user) => {
+      set({ loading: true })
+      const { data } = await AuthService.register(user)
+      localStorage.setItem("token", data["token"])
+      try {
         set(() => ({
-          ...initialState,
+          isAuth: true,
+          user: data.id,
+          token: data.token,
         }))
-      },
+        set({ loading: false })
+      } catch (error) {
+        set(() => ({ error: "", loading: false }))
+      }
+    },
 
-      cleanErrors: () => set(() => ({ error: null })),
-    })),
-  ),
+    login: async (user: TSignIn) => {
+      const { data } = await AuthService.login(user)
+      localStorage.setItem("token", data["token"])
+      try {
+        set(() => ({
+          isAuth: true,
+          user: data.id,
+          token: data.token,
+        }))
+      } catch (error) {
+        set(() => ({ error: "" }))
+      }
+    },
+    logout: () => {
+      localStorage.setItem("token", "")
+      set(() => ({
+        ...initialState,
+      }))
+    },
+
+    cleanErrors: () => set(() => ({ error: null })),
+  })),
 )

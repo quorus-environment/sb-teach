@@ -9,8 +9,9 @@ export type  TUser = {
 
 
 export type TUserStore = {
-    user: Partial<TUser> | null
+    user: string | null
     isAuth: boolean,
     error: string | null
     loading: boolean,
+    token: string | null
 }

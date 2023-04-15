@@ -1,0 +1,16 @@
+.auth-roles{
+    display: flex;
+    justify-content: space-between;
+    row-gap: 25px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.auth-role{
+    display: inline-block;
+    color: black;
+    width: 205px;
+    background: rgba(223, 223, 223, 0.46);
+    border-radius: 9px;
+    padding: 11px 30px;
+}

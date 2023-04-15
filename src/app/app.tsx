@@ -1,37 +1,45 @@
-import "./app.css"
-import { Auth } from "../pages/auth/auth"
-import { Routes, Route, Navigate } from "react-router-dom"
-import { EntryTest } from "../pages/entry-test/entry-test"
-import { EntryTestQuestion } from "../pages/entry-test-question/entry-test-question"
-import { EntryTestStatistic } from "../pages/entry-test-statistic/entry-test-statistic"
+import './app.css'
+import {Login} from "../pages/auth/login";
+import { Routes, Route, Navigate } from "react-router-dom";
+import {Register} from "../pages/register/register";
+import {useAuthStore} from "../shared/stores/user/lib/user-store";
+import {useEffect} from "react";
+import authService, {AuthService} from "../shared/services/auth-service";
+
 
 const App = () => {
-  const token = localStorage.getItem("token")
-  if (!token) {
-    return (
-      <div className="app" id="app">
-        <Routes>
-          <Route path="/sign-in" element={<Auth />}></Route>
-          <Route path="*" element={<Navigate to="/sign-in" />}></Route>
-          <Route path="/test/entry" element={<EntryTest />}></Route>
-          <Route path="/test/entry/:id" element={<EntryTestQuestion />}></Route>
-          <Route
-            path="/test/entry/statistic"
-            element={<EntryTestStatistic />}
-          ></Route>
-        </Routes>
-      </div>
-    )
-  }
+    const token = localStorage.getItem("token")
+    const {user, refresh, isLoading} = useAuthStore(st => ({
+        user: st.user,
+        refresh: st.refresh,
+        isLoading: st.loading
+    }))
+    useEffect(() => {
+        refresh().then(console.log)
+    }, [])
+    if (isLoading) {
+        return <div>loading...</div>
+    }
+    if (!user) {
+        return (
+            <div className={"app"}>
+                <Routes>
+                    <Route path="/sign-in" element={<Login />}></Route>
+                    <Route path="/register" element={<Register />}></Route>
+                    <Route path="*" element={<Navigate to="/sign-in" />}></Route>
+                </Routes>
+            </div>
+        );
+    }
 
-  return (
-    <div id="app">
-      <Routes>
-        <Route path="/" element={<div>content</div>}></Route>
-        <Route path="*" element={<Navigate to={"/"} />}></Route>
-      </Routes>
-    </div>
-  )
+    return (
+        <div className={"app"}>
+            <Routes>
+                <Route path="/" element={<div>content</div>}></Route>
+                <Route path="*" element={<Navigate to={"/"} />}></Route>
+            </Routes>
+        </div>
+    );
 }
 
 export default App
