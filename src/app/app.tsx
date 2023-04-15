@@ -14,16 +14,23 @@ const spec: Array<string> = []
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
+  const [spec, setSpec] = useState<Array<string> | null>(null)
+  const [isTested, setTested] = useState<Array<string> | null>(null)
   const { user, refresh } = useAuthStore((st) => ({
-    user: st.user,
+    user: st.user_id,
     refresh: st.refresh,
   }))
   useEffect(() => {
     if (!user) {
-      refresh().finally(() => setFetched(true))
+      refresh()
+        .then((data) => {
+          setSpec(data?.["spec"] || null)
+          setTested(data?.["isTested"] || null)
+        })
+        .finally(() => setFetched(true))
     }
   }, [])
-  if (isFetched) {
+  if (!isFetched) {
     return <div>loading...</div>
   }
   if (!user) {
@@ -38,7 +45,7 @@ const App = () => {
       </div>
     )
   }
-  if (spec.length === 0) {
+  if (spec && spec.length === 0) {
     return (
       <div className={"app"}>
         <Routes>

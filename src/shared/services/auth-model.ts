@@ -4,6 +4,9 @@ export type TResponseAuth = {
   token: string
   id: string
   role: string
+  name: string
+  is_tested: string
+  spec: Array<string>
 }
 
 export type TSignIn = {

@@ -17,8 +17,9 @@ const initialState: TUserStore = {
   isAuth: false,
   error: null,
   role: Role.jobOfferer,
-  user: null,
+  user_id: null,
   token: null,
+  title: null,
 }
 
 export const useAuthStore = create<TUserStore & Actions>()(
@@ -33,13 +34,15 @@ export const useAuthStore = create<TUserStore & Actions>()(
         set({ error: "Произошла ошибка" })
         throw Error("Произошла ошибка", e.response.status)
       })
+
       localStorage.setItem("token", data["token"])
       set(() => ({
         isAuth: true,
         role: data.role,
-        user: data.id,
+        user_id: data.id,
         token: data.token,
       }))
+      return data
     },
     register: async (user) => {
       const { data } = await AuthService.register(user)
@@ -47,7 +50,8 @@ export const useAuthStore = create<TUserStore & Actions>()(
       try {
         set(() => ({
           isAuth: true,
-          user: data.id,
+          user_id: data.id,
+          title: data.name,
           role: data.role,
           token: data.token,
         }))
@@ -67,7 +71,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
       try {
         set(() => ({
           isAuth: true,
-          user: data.id,
+          user_id: data.id,
           role: data.role,
           token: data.token,
         }))
