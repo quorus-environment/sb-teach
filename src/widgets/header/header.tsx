@@ -5,6 +5,13 @@ import { useMemo } from "react"
 import { Role } from "../../shared/model/role"
 import { useCurrentRole } from "../../main"
 
+const translate = {
+  [Role.applicant]: "Соискатель",
+  [Role.mentor]: "Ментор",
+  [Role.jobOfferer]: "Работодатель",
+  [Role.employer]: "Заказчик",
+}
+
 export const Header = () => {
   const { role, name } = useAuthStore((st) => ({
     role: st.role,
@@ -42,7 +49,7 @@ export const Header = () => {
           value={currentRole as string}
         >
           {role?.map((r) => (
-            <option value={r}>{r}</option>
+            <option value={r}>{translate[r]}</option>
           ))}
         </select>
       )}

@@ -71,8 +71,8 @@ export const AdditionalInfo = () => {
               <div className={"additional-info__selects"}>
                 <select
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    // console.log(e.target.value)
                     setDirection(e.target.value)
-                    setFramework(null)
                   }}
                 >
                   <option value="" disabled selected hidden>
@@ -87,9 +87,6 @@ export const AdditionalInfo = () => {
                       setFramework(e.target.value)
                     }
                   >
-                    <option value="" disabled hidden>
-                      frontend framework
-                    </option>
                     {frontendFrames?.map((element: any, index: any) => (
                       <option key={index} value={element.id}>
                         {element.title}
@@ -103,9 +100,6 @@ export const AdditionalInfo = () => {
                       setFramework(e.target.value)
                     }
                   >
-                    <option value="" disabled selected hidden>
-                      backend framework
-                    </option>
                     {backendFrames?.map((element: any, index: any) => (
                       <option key={index} value={element.id}>
                         {element.title}

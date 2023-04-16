@@ -1,6 +1,21 @@
 import { Applicant } from "../../pages/user-list/applicant-list"
 import "./mentors-list.css"
 import { Button } from "../../shared/ui/button/button"
+import app from "../../app/app"
+
+export function unsecuredCopyToClipboard(text: string) {
+  const textArea = document.createElement("textarea")
+  textArea.value = text
+  document.body.appendChild(textArea)
+  textArea.focus()
+  textArea.select()
+  try {
+    document.execCommand("copy")
+  } catch (err) {
+    console.error("Unable to copy to clipboard", err)
+  }
+  document.body.removeChild(textArea)
+}
 
 export const MentorsList: React.FC<{ applicants: Applicant[] }> = ({
   applicants,
@@ -24,7 +39,11 @@ export const MentorsList: React.FC<{ applicants: Applicant[] }> = ({
           </div>
           <div className={"mentors-list__right"}>
             <p>{appl.category}</p>
-            <Button>Хочу на менторство</Button>
+            <a href={`mailto:${appl.email}`} target={"_blank"}>
+              <Button onClick={() => unsecuredCopyToClipboard(appl.email)}>
+                Хочу на менторство
+              </Button>
+            </a>
           </div>
         </div>
       ))}

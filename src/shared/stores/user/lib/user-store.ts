@@ -5,6 +5,7 @@ import { TSignIn, TSignUp } from "../../../services/auth-model"
 import { AuthService } from "../../../services/auth-service"
 import { Role } from "../../../model/role"
 import { AxiosError } from "axios"
+import { useCurrentRole } from "../../../../main"
 
 type Actions = {
   register: (user: TSignUp) => Promise<void>
