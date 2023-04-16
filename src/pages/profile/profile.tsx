@@ -6,6 +6,8 @@ import { AuthService } from "../../shared/services/auth-service"
 import { TProfileData } from "../../shared/services/auth-model"
 import { useCurrentRole } from "../../main"
 import { Role } from "../../shared/model/role"
+import { Chart } from "../../shared/components/chart/chart"
+import { Loader } from "../../shared/ui/loader/loader"
 
 export const rolesInterpretor: Record<string, string> = {
   applicant: "Соискатель",
@@ -18,18 +20,36 @@ export const Profile = () => {
       setProfileData(data)
     })
   }, [])
+
+  const addPhoto = () => {}
   const { currentRole } = useCurrentRole()
-  if (!profileData) return <div>loading...</div>
+  if (!profileData)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader></Loader>
+      </div>
+    )
+
   return (
     <div className={"profile-container"}>
       <div className={"profile-row"}>
         <div className={"profile-image"}>
           <img
             src={
-              "https://p.kindpng.com/picc/s/188-1884521_naruto-png-hd-background-naruto-black-and-white.png"
+              "https://yakovgo.gosuslugi.ru/netcat_files/265/2549/headshot.jpg"
             }
           ></img>
-          <p>Добавить фотографию</p>
+          <p className={"profile-add-photo"} onClick={addPhoto}>
+            Добавить фотографию
+          </p>
         </div>
         <div className={"profile-info"}>
           <InfoList
@@ -52,9 +72,13 @@ export const Profile = () => {
           <p className={"profile-profession"}>
             Профессия: Frontend-разработчик
           </p>
-          <p className={"profile-rate"}>
-            Текущий рейтинг: {profileData.rating}
-          </p>
+          <div className={"profile-rate"}>
+            <p>Текущий рейтинг:</p>
+            <Chart
+              percentage={profileData.rating || 0}
+              extraClass={"profile-rate__chart"}
+            />
+          </div>
         </div>
         <div className={"profile-about"}>
           <textarea

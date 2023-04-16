@@ -16,6 +16,7 @@ import { Role } from "../shared/model/role"
 import { ApplicantList } from "../pages/user-list/applicant-list"
 import { useCurrentRole } from "../main"
 import { FindMentors } from "../pages/find-mentors/find-mentors."
+import { Loader } from "../shared/ui/loader/loader"
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
@@ -35,7 +36,19 @@ const App = () => {
     }
   }, [])
   if (!isFetched) {
-    return <div>loading...</div>
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader type={"app-loader"}></Loader>
+      </div>
+    )
   }
   if (!user) {
     return (
@@ -89,7 +102,6 @@ const App = () => {
       <Header />
       <div className={"wrapper"}>
         <Routes>
-          <Route path="/find-mentors" element={<FindMentors />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/train" element={<Train />}></Route>
           <Route path="/find-project" element={<div>Find project</div>}></Route>

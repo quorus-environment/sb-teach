@@ -30,7 +30,16 @@ textarea{
     justify-content: space-between;
 }
 .profile-rate{
+    display: flex;
+    align-items: center;
     margin-bottom: 40px;
+}
+
+.profile-rate__chart{
+    width: 55px;
+    height: 55px;
+    font-size: 12px;
+    margin-left: 15px;
 }
 
 .profile-profession{
@@ -67,6 +76,10 @@ textarea{
     position: relative;
     width: 255px;
     height: 255px;
+    border: 0.5px solid rgba(139, 139, 139, 0.36);
+}
+.profile-add-photo{
+    cursor: pointer;
 }
 .profile-image img{
     margin-bottom: 33px;

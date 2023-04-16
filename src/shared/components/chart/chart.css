@@ -2,6 +2,7 @@
     width: 80px;
     height: 80px;
     position: relative;
+    font-size: 33px;
 }
 
 .chart--percentage {
@@ -15,6 +16,5 @@
     align-items: center;
     background-color: transparent;
     font-weight: 400;
-    font-size: 33px;
     line-height: 39px;
 }
