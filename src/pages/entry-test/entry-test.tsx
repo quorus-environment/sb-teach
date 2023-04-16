@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 export type TQuestion = {
   id: string
   type: string
-  question: string
+  title: string
   answers: Array<string | number>
   answer: number
 }
@@ -15,12 +15,12 @@ export const questions: Array<TQuestion> = [
   {
     id: "1",
     type: "React",
-    question: "Бла-бла",
+    title: "Бла-бла",
     answers: [1, 2, 3, 4],
     answer: 2,
   },
-  { id: "2", type: "Js", question: "Ы-Ы", answers: [1, 2, 3, 4], answer: 1 },
-  { id: "3", type: "React", question: "и-и", answers: [1, 2, 3, 4], answer: 3 },
+  { id: "2", type: "Js", title: "Ы-Ы", answers: [1, 2, 3, 4], answer: 1 },
+  { id: "3", type: "React", title: "и-и", answers: [1, 2, 3, 4], answer: 3 },
 ]
 
 export const EntryTest: FC = () => {

@@ -35,7 +35,7 @@ export const EntryTestQuestion = () => {
     <div className="test-question__container">
       <p className="test-question__question--number">Вопрос {questionIndex}</p>
       <div className="test-question__question-container">
-        <p className="test-question__question">{question?.question}</p>
+        <p className="test-question__question">{question?.title}</p>
       </div>
       <div className="test-question__answers-container">
         {question?.answers.map((answer, index) => (

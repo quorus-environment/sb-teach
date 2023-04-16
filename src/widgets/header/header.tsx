@@ -5,8 +5,9 @@ import { useMemo } from "react"
 import { Role } from "../../shared/model/role"
 
 export const Header = () => {
-  const { role } = useAuthStore((st) => ({
+  const { role, name } = useAuthStore((st) => ({
     role: st.role,
+    name: st.title,
   }))
   const roledLinks = useMemo(() => {
     if (role === Role.jobOfferer) {
@@ -33,8 +34,15 @@ export const Header = () => {
       </nav>
       <Link to={"/profile"}>
         <div className={"header__personal"}>
-          {"Имя Фамилия"}
-          <img src={"#"} />
+          {name}
+          <img
+            height={32}
+            width={32}
+            style={{ borderRadius: "50%" }}
+            src={
+              "https://yakovgo.gosuslugi.ru/netcat_files/265/2549/headshot.jpg"
+            }
+          />
         </div>
       </Link>
     </div>
