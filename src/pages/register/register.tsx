@@ -41,7 +41,7 @@ export const Register = () => {
       second_name: secondName,
       password,
       phone,
-      role,
+      role: [role],
       invitations: [],
     })
   }

@@ -22,6 +22,7 @@ const initialState: TUserStore = {
   title: null,
   is_tested: false,
   spec: null,
+  rating: 0 || null,
 }
 
 export const useAuthStore = create<TUserStore & Actions>()(
@@ -46,6 +47,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
         is_tested: data.is_tested,
         spec: data.spec,
         title: data.name,
+        rating: data.rating,
       }))
       return data
     },
@@ -61,6 +63,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
           token: data.token,
           is_tested: data.is_tested,
           spec: data.spec,
+          rating: data.rating,
         }))
       } catch (e: any) {
         if (e.response.status === 403) {
@@ -81,6 +84,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
           user_id: data.id,
           role: data.role,
           token: data.token,
+          rating: data.rating,
         }))
       } catch (error) {
         set(() => ({ error: "" }))

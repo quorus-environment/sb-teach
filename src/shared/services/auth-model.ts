@@ -7,6 +7,7 @@ export type TResponseAuth = {
   role: Role[]
   name: string
   is_tested: boolean
+  rating: number | null
   spec: Array<string>
 }
 
@@ -23,6 +24,7 @@ export type TProfileData = {
   role: Role[]
   second_name: string
   username: string
+  rating: number | null
 }
 
 export type TSignUp = {
@@ -32,7 +34,7 @@ export type TSignUp = {
   email: string
   phone: string
   first_name: string
-  role: string
+  role: string[]
   last_name: string
   second_name: string | null
 }

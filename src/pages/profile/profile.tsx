@@ -4,6 +4,8 @@ import { InfoList } from "../../shared/ui/info-list/info-list"
 import { Button } from "../../shared/ui/button/button"
 import { AuthService } from "../../shared/services/auth-service"
 import { TProfileData } from "../../shared/services/auth-model"
+import { useCurrentRole } from "../../main"
+import { Role } from "../../shared/model/role"
 
 export const rolesInterpretor: Record<string, string> = {
   applicant: "Соискатель",
@@ -16,6 +18,7 @@ export const Profile = () => {
       setProfileData(data)
     })
   }, [])
+  const { currentRole } = useCurrentRole()
   if (!profileData) return <div>loading...</div>
   return (
     <div className={"profile-container"}>
@@ -35,7 +38,7 @@ export const Profile = () => {
               profileData.first_name,
               profileData.second_name,
               profileData.first_name,
-              rolesInterpretor[profileData.role],
+              rolesInterpretor[currentRole as Role],
             ]}
           ></InfoList>
           <InfoList
@@ -49,8 +52,9 @@ export const Profile = () => {
           <p className={"profile-profession"}>
             Профессия: Frontend-разработчик
           </p>
-          <p className={"profile-rate"}>Текущий рейтинг: 76</p>
-          <p>Обновить рейтинг</p>
+          <p className={"profile-rate"}>
+            Текущий рейтинг: {profileData.rating}
+          </p>
         </div>
         <div className={"profile-about"}>
           <textarea
