@@ -10,7 +10,7 @@ type Actions = {
   logout: () => void
   cleanErrors: () => void
   login: (user: TSignIn) => void
-  refresh: () => Promise<void>
+  refresh: () => Promise<any>
 }
 
 const initialState: TUserStore = {
@@ -47,6 +47,7 @@ export const useAuthStore = create<TUserStore & Actions>()(
         spec: data.spec,
         title: data.name,
       }))
+      return data
     },
     register: async (user) => {
       const { data } = await AuthService.register(user)

@@ -13,8 +13,6 @@ import { Profile } from "../pages/profile/profile"
 import { Train } from "../pages/train/train"
 import { TechPage } from "../pages/tech-page"
 
-const spec: Array<string> = []
-
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
   const { user, refresh, spec, isTested } = useAuthStore((st) => ({
@@ -46,10 +44,35 @@ const App = () => {
   if (spec && spec.length === 0) {
     return (
       <div className={"app"}>
-        <Routes>
-          <Route path="/additional-info" element={<AdditionalInfo />}></Route>
-          <Route path="*" element={<Navigate to="/additional-info" />}></Route>
-        </Routes>
+        <div className={"wrapper"}>
+          <Routes>
+            <Route path="/additional-info" element={<AdditionalInfo />}></Route>
+            <Route
+              path="*"
+              element={<Navigate to="/additional-info" />}
+            ></Route>
+          </Routes>
+        </div>
+      </div>
+    )
+  }
+  if (!isTested) {
+    return (
+      <div className={"app"}>
+        <div className={"wrapper"}>
+          <Routes>
+            <Route path="/test/entry" element={<EntryTest />}></Route>
+            <Route
+              path="/test/entry/:id"
+              element={<EntryTestQuestion />}
+            ></Route>
+            <Route
+              path="/test/entry/statistic"
+              element={<EntryTestStatistic />}
+            ></Route>
+            <Route path="*" element={<Navigate to="/test/entry" />}></Route>
+          </Routes>
+        </div>
       </div>
     )
   }
@@ -58,18 +81,13 @@ const App = () => {
       <Header />
       <div className={"wrapper"}>
         <Routes>
-          <Route path="/test/entry" element={<EntryTest />}></Route>
-          <Route path="/find-project" element={<div>Find project</div>}></Route>
-          <Route path="/find-mentor" element={<div>Find mentor</div>}></Route>
-          <Route path="/test/entry/:id" element={<EntryTestQuestion />}></Route>
-          <Route
-            path="/test/entry/statistic"
-            element={<EntryTestStatistic />}
-          ></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/train" element={<Train />}></Route>
+          <Route path="/find-project" element={<div>Find project</div>}></Route>
+          <Route path="/find-mentor" element={<div>Find mentor</div>}></Route>
           <Route path="/tech/:id" element={<TechPage />}></Route>
-          <Route path="*" element={<Navigate to={"/train"} />}></Route>
+          <Route path="/" element={<div>content</div>}></Route>
+          <Route path="*" element={<Navigate to={"/"} />}></Route>
         </Routes>
       </div>
     </div>
