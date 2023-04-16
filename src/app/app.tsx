@@ -15,6 +15,7 @@ import { TechPage } from "../pages/tech-page"
 import { Role } from "../shared/model/role"
 import { ApplicantList } from "../pages/user-list/applicant-list"
 import { useCurrentRole } from "../main"
+import { FindMentors } from "../pages/find-mentors/find-mentors."
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
@@ -88,6 +89,7 @@ const App = () => {
       <Header />
       <div className={"wrapper"}>
         <Routes>
+          <Route path="/find-mentors" element={<FindMentors />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/train" element={<Train />}></Route>
           <Route path="/find-project" element={<div>Find project</div>}></Route>

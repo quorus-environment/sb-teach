@@ -26,15 +26,6 @@ export const ApplicantList = () => {
         })),
       ),
     )
-    // setApplicants([
-    //   { id: "123", name: "Лена Сыс", email: "pavlovena@inbox.ru", rating: 80 },
-    //   {
-    //     id: "1233",
-    //     name: "Лена Сыс 2",
-    //     email: "pavlovena2@inbox.ru",
-    //     rating: 80,
-    //   },
-    // ])
   }, [])
   return <List applicants={applicants || []} />
 }

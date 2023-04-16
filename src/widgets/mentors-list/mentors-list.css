@@ -1,0 +1,29 @@
+.mentors-list {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    gap: 20px;
+}
+
+.mentors-list_item {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mentors-list__left {
+    display: flex;
+    gap: 10px;
+}
+.mentors-list__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mentors-list__avatar {
+    width: 150px;
+}
+

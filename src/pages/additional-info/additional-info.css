@@ -22,13 +22,15 @@ select{
   font-weight: 500;
 }
 
-.additional-info__choose-spec{
+.additional-info__choose-spec {
   display: flex;
   justify-content: space-between;
   padding-bottom: 30px;
   margin-bottom: 30px;
   transition: height 1s ease-out;
 }
+
+
 .additional-info__selects{
   max-width: 50%;
   display: flex;
@@ -39,4 +41,22 @@ select{
 
 .additional-info__title {
   margin-bottom: 82px;
+}
+
+
+@media (max-width: 500px) {
+  .additional-info__choose-spec {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .additional-info__choose-spec p {
+    margin-bottom: 16px;
+  }
+
+  .additional-info__selects select {
+    width: 100%;
+  }
 }

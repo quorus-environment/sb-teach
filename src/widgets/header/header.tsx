@@ -19,7 +19,7 @@ export const Header = () => {
       return [
         { to: "/train", text: "Тренироваться" },
         { to: "/find-project", text: "Найти проект" },
-        { to: "/find-mentor", text: "Найти ментора" },
+        { to: "/find-mentors", text: "Найти ментора" },
       ]
     }
   }, [currentRole])

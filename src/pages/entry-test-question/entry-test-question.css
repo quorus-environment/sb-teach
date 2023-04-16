@@ -47,3 +47,12 @@
     align-items: center;
 }
 
+@media (max-width: 880px) {
+    .test-question__question-container {
+        margin-bottom: 12px
+    }
+
+    .test-question__answer:not(:nth-child(2n)) {
+        margin-right: 0px
+    }
+}
