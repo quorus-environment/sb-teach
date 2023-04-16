@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect } from "react"
 import "./entry-test.css"
 import { Button } from "../../shared/ui/button/button"
 import { useNavigate } from "react-router-dom"
 import { useAuthStore } from "../../shared/stores/user/lib/user-store"
 import $api from "../../shared/services/auth-service"
 import { useQuestionStore } from "../../shared/stores/questions/lib/questions-store"
+import { Role } from "../../shared/model/role"
 
 export type TQuestion = {
   id: string
@@ -17,7 +18,7 @@ export type TQuestion = {
 
 export const EntryTest: FC = () => {
   const navigate = useNavigate()
-  const { refresh } = useAuthStore()
+  const { refresh, role } = useAuthStore()
   const { addQuestions, questions } = useQuestionStore()
   const handleClick = () => {
     navigate(questions ? `/test/entry/${questions[0].id}` : "/", {

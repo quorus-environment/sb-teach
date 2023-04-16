@@ -1,9 +1,10 @@
 import { TUser } from "../stores/user/model/interface"
+import { Role } from "../model/role"
 
 export type TResponseAuth = {
   token: string
   id: string
-  role: string
+  role: Role[]
   name: string
   is_tested: boolean
   spec: Array<string>
@@ -19,7 +20,7 @@ export type TProfileData = {
   id: string
   image: string | null
   last_name: string
-  role: string
+  role: Role[]
   second_name: string
   username: string
 }

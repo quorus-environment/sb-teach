@@ -10,10 +10,10 @@ export const Header = () => {
     name: st.title,
   }))
   const roledLinks = useMemo(() => {
-    if (role === Role.jobOfferer) {
+    if (role?.includes(Role.jobOfferer)) {
       return [{ to: "/applicant-list", text: "Соискатели" }]
     }
-    if (role === Role.applicant) {
+    if (role?.includes(Role.applicant)) {
       return [
         { to: "/train", text: "Тренироваться" },
         { to: "/find-project", text: "Найти проект" },

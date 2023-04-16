@@ -58,63 +58,65 @@ export const AdditionalInfo = () => {
   }
 
   return (
-    isLoaded && (
-      <div className="additional-info">
-        <div className={"additional-info__container"}>
-          <h1>Еще немного информации о вас</h1>
-          <div className={"additional-info__choose-spec"}>
-            <p>Выберите свое направление</p>
-            <div className={"additional-info__selects"}>
-              <select
-                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                  setDirection(e.target.value)
-                }
-              >
-                <option value="" disabled selected hidden>
-                  Профессия
-                </option>
-                <option value="frontend">frontend-разработка</option>
-                <option value="backend">backend-разработка</option>
-              </select>
-              {direction === "frontend" && (
+    <>
+      {isLoaded && (
+        <div className="additional-info">
+          <div className={"additional-info__container"}>
+            <h1>Еще немного информации о вас</h1>
+            <div className={"additional-info__choose-spec"}>
+              <p>Выберите свое направление</p>
+              <div className={"additional-info__selects"}>
                 <select
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                    setFramework(e.target.value)
+                    setDirection(e.target.value)
                   }
                 >
                   <option value="" disabled selected hidden>
-                    frontend framework
+                    Профессия
                   </option>
-                  {frontendFrames?.map((element: any, index: any) => (
-                    <option key={index} value={element.id}>
-                      {element.title}
-                    </option>
-                  ))}
+                  <option value="frontend">frontend-разработка</option>
+                  <option value="backend">backend-разработка</option>
                 </select>
-              )}
-              {direction === "backend" && (
-                <select
-                  onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                    setFramework(e.target.value)
-                  }
-                >
-                  <option value="" disabled selected hidden>
-                    backend framework
-                  </option>
-                  {backendFrames?.map((element: any, index: any) => (
-                    <option key={index} value={element.id}>
-                      {element.title}
+                {direction === "frontend" && (
+                  <select
+                    onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                      setFramework(e.target.value)
+                    }
+                  >
+                    <option value="" disabled selected hidden>
+                      frontend framework
                     </option>
-                  ))}
-                </select>
-              )}
+                    {frontendFrames?.map((element: any, index: any) => (
+                      <option key={index} value={element.id}>
+                        {element.title}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                {direction === "backend" && (
+                  <select
+                    onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                      setFramework(e.target.value)
+                    }
+                  >
+                    <option value="" disabled selected hidden>
+                      backend framework
+                    </option>
+                    {backendFrames?.map((element: any, index: any) => (
+                      <option key={index} value={element.id}>
+                        {element.title}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
             </div>
+            <center>
+              <Button onClick={onSubmit}>Сохранить</Button>
+            </center>
           </div>
-          <center>
-            <Button onClick={onSubmit}>Сохранить</Button>
-          </center>
         </div>
-      </div>
-    )
+      )}
+    </>
   )
 }

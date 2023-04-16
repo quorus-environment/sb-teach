@@ -16,7 +16,7 @@ type Actions = {
 const initialState: TUserStore = {
   isAuth: false,
   error: null,
-  role: Role.jobOfferer,
+  role: [Role.jobOfferer],
   user_id: null,
   token: null,
   title: null,

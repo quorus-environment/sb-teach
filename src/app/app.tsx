@@ -12,14 +12,17 @@ import { Header } from "../widgets/header/header"
 import { Profile } from "../pages/profile/profile"
 import { Train } from "../pages/train/train"
 import { TechPage } from "../pages/tech-page"
+import { Role } from "../shared/model/role"
+import { ApplicantList } from "../pages/user-list/applicant-list"
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
-  const { user, refresh, spec, isTested } = useAuthStore((st) => ({
+  const { user, refresh, spec, isTested, role } = useAuthStore((st) => ({
     user: st.user_id,
     refresh: st.refresh,
     isTested: st.is_tested,
     spec: st.spec,
+    role: st.role,
   }))
   useEffect(() => {
     if (!user) {
@@ -56,7 +59,7 @@ const App = () => {
       </div>
     )
   }
-  if (!isTested) {
+  if (!isTested && role?.includes(Role.applicant)) {
     return (
       <div className={"app"}>
         <div className={"wrapper"}>
@@ -86,8 +89,16 @@ const App = () => {
           <Route path="/find-project" element={<div>Find project</div>}></Route>
           <Route path="/find-mentor" element={<div>Find mentor</div>}></Route>
           <Route path="/tech/:id" element={<TechPage />}></Route>
-          <Route path="/" element={<div>content</div>}></Route>
-          <Route path="*" element={<Navigate to={"/"} />}></Route>
+          <Route path="/applicant-list" element={<ApplicantList />}></Route>
+
+          <Route
+            path="*"
+            element={
+              <Navigate
+                to={role?.includes(Role.jobOfferer) ? "/applicant-list" : "/"}
+              />
+            }
+          ></Route>
         </Routes>
       </div>
     </div>

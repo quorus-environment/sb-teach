@@ -1,3 +1,5 @@
+import { Role } from "../../../model/role"
+
 export type TUser = {
   id: string
   role: string
@@ -9,7 +11,7 @@ export type TUser = {
 
 export type TUserStore = {
   user_id: string | null
-  role: string | null
+  role: Role[] | null
   isAuth: boolean
   error: string | null
   token: string | null
