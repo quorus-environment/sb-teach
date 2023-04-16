@@ -2,8 +2,13 @@ import React, { useState } from "react"
 import "./entry-test-question.css"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "../../shared/ui/button/button"
-import { useQuestionStore } from "../../shared/stores/questions/lib/questions-store"
+import {
+  TAnswer,
+  useQuestionStore,
+} from "../../shared/stores/questions/lib/questions-store"
 import { TQuestion } from "../entry-test/entry-test"
+import $api from "../../shared/services/auth-service"
+import { AxiosResponse } from "axios"
 
 export const EntryTestQuestion = () => {
   const { questions, addAnswer } = useQuestionStore((state) => ({
@@ -17,13 +22,13 @@ export const EntryTestQuestion = () => {
   const question = questions.find((el) => el.id === id)
   const questionIndex = questions.findIndex((el) => el.id === id)
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (questionIndex === questions.length - 1) {
       navigate(`/test/entry/statistic`, { replace: true })
     } else {
       navigate(`/test/entry/${questions[questionIndex + 1].id}`)
     }
-    addAnswer(activeAnswer)
+    addAnswer({ answer: `${activeAnswer}`, uuid: question?.id as string })
     setActiveAnswer(null)
   }
 
@@ -35,7 +40,7 @@ export const EntryTestQuestion = () => {
     <div className="test-question__container">
       <p className="test-question__question--number">Вопрос {questionIndex}</p>
       <div className="test-question__question-container">
-        <p className="test-question__question">{question?.question}</p>
+        <p className="test-question__question">{question?.title}</p>
       </div>
       <div className="test-question__answers-container">
         {question?.answers.map((answer, index) => (

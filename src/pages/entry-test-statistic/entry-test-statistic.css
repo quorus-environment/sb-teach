@@ -5,11 +5,16 @@
     text-align: center;
     margin-bottom: 50px;
 }
-
+.test-question-statistic__chart{
+    width: 200px;
+    height: 200px;
+}
 .test-question-statistic__scores-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 280px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 160px;
 }
 
 .test-question-statistic__score {

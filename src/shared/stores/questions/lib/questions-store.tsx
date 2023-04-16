@@ -7,13 +7,16 @@ const initialState = {
   questions: null,
 }
 
+export type TAnswer = { uuid: string; answer: string }
+
 export type TQuestionStore = {
   questions: Array<TQuestion> | null
-  answers: Array<number | null>
+  answers: Array<TAnswer>
 }
 
 export type TQuestionAction = {
-  addAnswer: (answer: number | null) => void
+  addAnswer: (answer: TAnswer) => void
+  addQuestions: (data: TQuestion[]) => void
   clearStorage: () => void
 }
 
