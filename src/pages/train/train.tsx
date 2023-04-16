@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import $api from "../../shared/services/auth-service"
 import { useNavigate } from "react-router-dom"
+import { Loader } from "../../shared/ui/loader/loader"
 
 const Tech = (props: { id: string; title: string }) => {
   const navigate = useNavigate()
@@ -29,9 +30,11 @@ export const Train = () => {
   useEffect(() => {
     $api
       .get("http://localhost:8080/technology/get_technologies")
-      .then((res) => setTechs(res.data.technologies))
+      .then((res) => {
+        setTechs(res.data.technologies)
+      })
   }, [])
-  return (
+  return techs.length ? (
     <div style={{ padding: 20 }}>
       <b>Frontend</b>
       <div style={{ display: "flex", gap: 10, marginBottom: 30 }}>
@@ -47,6 +50,18 @@ export const Train = () => {
         .map((tech) => (
           <Tech id={tech.id} title={tech.title} key={tech.id} />
         ))}
+    </div>
+  ) : (
+    <div
+      style={{
+        height: "100vh",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Loader></Loader>
     </div>
   )
 }

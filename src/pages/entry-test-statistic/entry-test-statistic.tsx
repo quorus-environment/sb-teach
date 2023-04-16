@@ -8,6 +8,8 @@ import "./entry-test-statistic.css"
 import { Button } from "../../shared/ui/button/button"
 import { AxiosResponse } from "axios"
 import $api from "../../shared/services/auth-service"
+import { Navigate, useNavigate } from "react-router-dom"
+import { Loader } from "../../shared/ui/loader/loader"
 
 const getMark = async (answers: TAnswer[]): Promise<{ rating: number }> => {
   const { data } = await $api.post("/questions/validate_question", {
@@ -17,13 +19,17 @@ const getMark = async (answers: TAnswer[]): Promise<{ rating: number }> => {
 }
 
 export const EntryTestStatistic = () => {
+  const navigate = useNavigate()
+
   const { answers, questions } = useQuestionStore((state) => ({
     questions: state.questions,
     answers: state.answers,
   }))
   const [loading, setLoading] = useState<boolean>(true)
   const [mark, setMark] = useState<number>(0)
-
+  const onClick = () => {
+    navigate("/profile")
+  }
   useEffect(() => {
     getMark(answers)
       .then((data) => setMark(data.rating))
@@ -43,10 +49,20 @@ export const EntryTestStatistic = () => {
         />
       </div>
       <div className="buttton__container">
-        <Button>Продолжить</Button>
+        <Button onClick={onClick}>Продолжить</Button>
       </div>
     </div>
   ) : (
-    <div>loading...</div>
+    <div
+      style={{
+        height: "100vh",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Loader></Loader>
+    </div>
   )
 }
