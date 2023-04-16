@@ -1,6 +1,7 @@
 .header {
     height: 60px;
-    padding: 0 120px;
+    max-width: 1240px;
+    margin: auto;
     font-weight: 500;
     font-size: 14px;
     display: flex;

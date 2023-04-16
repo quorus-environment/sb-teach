@@ -15,14 +15,13 @@ export const List: React.FC<{ applicants: Applicant[] }> = ({ applicants }) => {
             />
             <div className={"list__contact"}>
               <p className={"list__title"}>{appl.name}</p>
-              <p className={"list__title"}>age</p>
-              <p className={"list__title"}>city</p>
-              <p className={"list__title"}>работа/вуз</p>
+              <p style={{ fontSize: 14 }}>{appl.second_name}</p>
+              <p style={{ fontSize: 14 }}>{appl.email}</p>
             </div>
           </div>
           <div className={"list__right"}>
-            <p>FrontEnd spec</p>
-            <div>90</div>
+            <p>{appl.category}</p>
+            <div>{appl.rating}</div>
           </div>
         </div>
       ))}

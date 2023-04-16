@@ -7,14 +7,25 @@ export type Applicant = {
   name: string
   email: string
   rating: number
+  second_name: string | undefined
+  category: "frontend" | "backend"
 }
 
 export const ApplicantList = () => {
   const [applicants, setApplicants] = useState<Applicant[]>([])
   useEffect(() => {
-    $api
-      .post("/applicants/", {})
-      .then((res) => setApplicants(res.data.applicants))
+    $api.post("/applicants/", {}).then((res) =>
+      setApplicants(
+        res.data.applicants.map((app: any) => ({
+          id: app.id,
+          name: app.first_name + " " + app.second_name,
+          email: app.mail,
+          rating: app.rating,
+          category: app.specializations,
+          second_name: app.last_name,
+        })),
+      ),
+    )
     // setApplicants([
     //   { id: "123", name: "Лена Сыс", email: "pavlovena@inbox.ru", rating: 80 },
     //   {
