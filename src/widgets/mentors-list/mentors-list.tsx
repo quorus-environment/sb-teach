@@ -35,10 +35,10 @@ export const MentorsList: React.FC<{ applicants: Applicant[] }> = ({
               <p className={"mentors-list__title"}>{appl.name}</p>
               <p style={{ fontSize: 14 }}>{appl.second_name}</p>
               <p style={{ fontSize: 14 }}>{appl.email}</p>
+              <p style={{ fontSize: 14 }}>{appl.category}</p>
             </div>
           </div>
           <div className={"mentors-list__right"}>
-            <p>{appl.category}</p>
             <a href={`mailto:${appl.email}`} target={"_blank"}>
               <Button onClick={() => unsecuredCopyToClipboard(appl.email)}>
                 Хочу на менторство
