@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 
 export const Login = () => {
   const { login } = useAuthStore()
+  const [loginError, setLoginError] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const onSubmit = (e: SyntheticEvent) => {
@@ -14,6 +15,9 @@ export const Login = () => {
     login({
       username,
       password,
+    }).catch((e) => {
+      setLoginError("Ошибка аутентификация")
+      console.log(e)
     })
   }
   return (
@@ -23,16 +27,24 @@ export const Login = () => {
         <Input
           type={"text"}
           value={username}
+          onInput={() => setLoginError("")}
           onChange={(e) => setUsername(e.target.value)}
           placeholder={"Имя"}
         ></Input>
         <Input
+          onInput={() => setLoginError("")}
           type={"password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder={"Пароль"}
         ></Input>
-        <Button type={"submit"}>Войти</Button>
+        {loginError.trim() && <p className={"error"}>{loginError}</p>}
+        <Button
+          disabled={![password, username].every((el) => el.trim() !== "")}
+          type={"submit"}
+        >
+          Войти
+        </Button>
         <Link className={"register-link"} to={"/register"}>
           Зарегестрироваться
         </Link>

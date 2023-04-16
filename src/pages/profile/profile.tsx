@@ -16,9 +16,11 @@ export const rolesInterpretor: Record<string, string> = {
 export const Profile = () => {
   const [profileData, setProfileData] = useState<TProfileData | null>(null)
   useEffect(() => {
-    AuthService.getProfileInfo().then(({ data }) => {
-      setProfileData(data)
-    })
+    AuthService.getProfileInfo()
+      .then(({ data }) => {
+        setProfileData(data)
+      })
+      .catch((e) => console.log(e))
   }, [])
 
   const addPhoto = () => {}

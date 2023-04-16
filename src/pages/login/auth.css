@@ -17,6 +17,13 @@
     text-align: center;
 }
 
+.error{
+    text-align: center;
+    color: red;
+    width: 100%;
+}
+
+
 .auth-container{
     width: 100%;
 }

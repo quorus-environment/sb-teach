@@ -32,8 +32,8 @@ export const EntryTest: FC = () => {
           technology: data.tech,
         })
         .then(({ data }) => addQuestions(data.questions))
+        .catch((e) => console.log(e))
     })
-    // setId(questions[0].id)
   }, [])
 
   return (

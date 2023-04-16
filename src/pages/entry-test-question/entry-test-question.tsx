@@ -2,13 +2,8 @@ import React, { useState } from "react"
 import "./entry-test-question.css"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "../../shared/ui/button/button"
-import {
-  TAnswer,
-  useQuestionStore,
-} from "../../shared/stores/questions/lib/questions-store"
+import { useQuestionStore } from "../../shared/stores/questions/lib/questions-store"
 import { TQuestion } from "../entry-test/entry-test"
-import $api from "../../shared/services/auth-service"
-import { AxiosResponse } from "axios"
 
 export const EntryTestQuestion = () => {
   const { questions, addAnswer } = useQuestionStore((state) => ({
@@ -22,7 +17,7 @@ export const EntryTestQuestion = () => {
   const question = questions.find((el) => el.id === id)
   const questionIndex = questions.findIndex((el) => el.id === id)
 
-  const handleClick = async () => {
+  const handleClick = () => {
     if (questionIndex === questions.length - 1) {
       navigate(`/test/entry/statistic`, { replace: true })
     } else {

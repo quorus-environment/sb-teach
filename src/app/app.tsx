@@ -28,13 +28,16 @@ const App = () => {
     role: st.role,
   }))
   const { setCurrentRole } = useCurrentRole()
+
   useEffect(() => {
     if (!user) {
       refresh()
         .then((res) => setCurrentRole(res.role[0]))
+        .catch((e) => console.log(e))
         .finally(() => setFetched(true))
     }
   }, [])
+
   if (!isFetched) {
     return (
       <div
@@ -57,7 +60,6 @@ const App = () => {
           <Route path="/sign-in" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="*" element={<Navigate to="/sign-in" />}></Route>
-          <Route></Route>
         </Routes>
       </div>
     )
@@ -108,12 +110,13 @@ const App = () => {
           <Route path="/applicant-list" element={<ApplicantList />}></Route>
           <Route path="/find-mentor" element={<div>Find mentor</div>}></Route>
           <Route path="/tech/:id" element={<TechPage />}></Route>
-
           <Route
             path="*"
             element={
               <Navigate
-                to={role?.includes(Role.jobOfferer) ? "/applicant-list" : "/"}
+                to={
+                  role?.includes(Role.jobOfferer) ? "/applicant-list" : "/train"
+                }
               />
             }
           ></Route>

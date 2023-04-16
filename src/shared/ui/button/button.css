@@ -8,3 +8,7 @@
     border-radius: 9px;
     color: white;
 }
+
+.button-default:disabled{
+    background: rgba(0, 166, 88, 0.64);
+}

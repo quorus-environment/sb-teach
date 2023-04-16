@@ -33,6 +33,7 @@ export const EntryTestStatistic = () => {
   useEffect(() => {
     getMark(answers)
       .then((data) => setMark(data.rating))
+      .catch((e) => console.log(e))
       .finally(() => setLoading(false))
   }, [])
 

@@ -42,6 +42,7 @@ export const AdditionalInfo = () => {
         setFrontendFrames(tech.frontend)
         setBackendFrames(tech.backend)
       })
+      .catch((e) => console.log(e))
       .finally(() => setLoaded(true))
   }, [])
   const { refresh } = useAuthStore((st) => ({
@@ -49,14 +50,16 @@ export const AdditionalInfo = () => {
   }))
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    $api.post("/users/save_additional_info", {
-      category: direction,
-      framework,
-      about,
-    })
-    refresh()
+    $api
+      .post("/users/save_additional_info", {
+        category: direction,
+        framework,
+        about,
+      })
+      .catch((e) => console.log(e))
+    refresh().catch((e) => console.log(e))
   }
-
+  console.log(direction, framework)
   return (
     <>
       {isLoaded && (
@@ -67,9 +70,10 @@ export const AdditionalInfo = () => {
               <p>Выберите свое направление</p>
               <div className={"additional-info__selects"}>
                 <select
-                  onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setDirection(e.target.value)
-                  }
+                    setFramework(null)
+                  }}
                 >
                   <option value="" disabled selected hidden>
                     Профессия
@@ -83,7 +87,7 @@ export const AdditionalInfo = () => {
                       setFramework(e.target.value)
                     }
                   >
-                    <option value="" disabled selected hidden>
+                    <option value="" disabled hidden>
                       frontend framework
                     </option>
                     {frontendFrames?.map((element: any, index: any) => (
@@ -112,7 +116,12 @@ export const AdditionalInfo = () => {
               </div>
             </div>
             <center>
-              <Button onClick={onSubmit}>Сохранить</Button>
+              <Button
+                disabled={[direction, framework].every((el) => !el)}
+                onClick={onSubmit}
+              >
+                Сохранить
+              </Button>
             </center>
           </div>
         </div>

@@ -43,7 +43,7 @@ export const Register = () => {
       phone,
       role: [role],
       invitations: [],
-    })
+    }).catch((e) => console.log(e))
   }
   return (
     <div className={"auth-container"}>
@@ -106,7 +106,23 @@ export const Register = () => {
             )
           })}
         </ul>
-        <Button type={"submit"}>Зарегистрироваться</Button>
+        <Button
+          disabled={
+            ![
+              username,
+              password,
+              firstName,
+              phone,
+              role,
+              lastName,
+              secondName,
+              email,
+            ].every((el) => el.trim() !== "")
+          }
+          type={"submit"}
+        >
+          Зарегистрироваться
+        </Button>
         <Link className={"login-link"} to={"/login"}>
           Есть аккаунт? Войти
         </Link>

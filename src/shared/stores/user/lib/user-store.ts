@@ -4,12 +4,13 @@ import { TUserStore } from "../model/interface"
 import { TSignIn, TSignUp } from "../../../services/auth-model"
 import { AuthService } from "../../../services/auth-service"
 import { Role } from "../../../model/role"
+import { AxiosError } from "axios"
 
 type Actions = {
-  register: (user: TSignUp) => void
+  register: (user: TSignUp) => Promise<void>
   logout: () => void
   cleanErrors: () => void
-  login: (user: TSignIn) => void
+  login: (user: TSignIn) => Promise<void>
   refresh: () => Promise<any>
 }
 
@@ -86,8 +87,9 @@ export const useAuthStore = create<TUserStore & Actions>()(
           token: data.token,
           rating: data.rating,
         }))
-      } catch (error) {
-        set(() => ({ error: "" }))
+      } catch (error: any) {
+        set(() => ({ error: "Ошибка входа" }))
+        throw Error("Ошибка входа")
       }
     },
     logout: () => {
