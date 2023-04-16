@@ -14,6 +14,7 @@ import { Train } from "../pages/train/train"
 import { TechPage } from "../pages/tech-page"
 import { Role } from "../shared/model/role"
 import { ApplicantList } from "../pages/user-list/applicant-list"
+import { useCurrentRole } from "../main"
 
 const App = () => {
   const [isFetched, setFetched] = useState<boolean>(false)
@@ -24,9 +25,12 @@ const App = () => {
     spec: st.spec,
     role: st.role,
   }))
+  const { setCurrentRole } = useCurrentRole()
   useEffect(() => {
     if (!user) {
-      refresh().finally(() => setFetched(true))
+      refresh()
+        .then((res) => setCurrentRole(res.role[0]))
+        .finally(() => setFetched(true))
     }
   }, [])
   if (!isFetched) {
